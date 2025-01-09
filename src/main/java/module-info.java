@@ -4,6 +4,7 @@ module dk.easv.moviemakers {
     requires java.sql;
     requires java.naming;
     requires com.microsoft.sqlserver.jdbc;
+    requires java.desktop;
 
 
     opens dk.easv.moviemakers to javafx.fxml;

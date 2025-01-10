@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="ancN" prefHeight="317.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.moviemakers.NewMovieView">
+   <children>
+      <TextField fx:id="titBarN" layoutX="33.0" layoutY="52.0" />
+      <TextField fx:id="yeaBarN" layoutX="33.0" layoutY="102.0" />
+      <TextField fx:id="perBarN" layoutX="33.0" layoutY="151.0" />
+      <TextField fx:id="imrBarN" layoutX="33.0" layoutY="200.0" />
+      <Text fx:id="titTexN" layoutX="33.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="yeaTexN" layoutX="33.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="perTexN" layoutX="33.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Rating">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="imrTexN" layoutX="33.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IMDB Rating">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="newTexN" layoutX="254.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New" wrappingWidth="45.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="catTexN" layoutX="445.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories" wrappingWidth="91.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <ScrollPane fx:id="scrBoxN" layoutX="368.0" layoutY="76.0" prefHeight="154.0" prefWidth="200.0">
+        <content>
+          <AnchorPane fx:id="scrMenN" minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="200.0">
+               <children>
+                  <CheckBox fx:id="comBoxN" layoutX="8.0" layoutY="6.0" mnemonicParsing="false" text="Comedy" />
+                  <CheckBox fx:id="draBoxN" layoutX="8.0" layoutY="23.0" mnemonicParsing="false" text="Drama" />
+                  <CheckBox fx:id="horBoxN" layoutX="8.0" layoutY="40.0" mnemonicParsing="false" text="Horror" />
+                  <CheckBox fx:id="actBoxN" layoutX="8.0" layoutY="57.0" mnemonicParsing="false" text="Action" />
+                  <CheckBox fx:id="fanBoxN" layoutX="8.0" layoutY="74.0" mnemonicParsing="false" text="Fantasy" />
+                  <CheckBox fx:id="romBoxN" layoutX="8.0" layoutY="92.0" mnemonicParsing="false" text="Romance" />
+                  <CheckBox fx:id="sciBoxN" layoutX="8.0" layoutY="109.0" mnemonicParsing="false" text="Science fiction" />
+                  <CheckBox fx:id="thrBoxN" layoutX="8.0" layoutY="126.0" mnemonicParsing="false" text="Thriller" />
+                  <CheckBox fx:id="wesBoxN" layoutX="8.0" layoutY="143.0" mnemonicParsing="false" text="Western" />
+                  <CheckBox fx:id="aniBoxN" layoutX="8.0" layoutY="160.0" mnemonicParsing="false" text="Animation" />
+                  <CheckBox fx:id="mysBoxN" layoutX="8.0" layoutY="177.0" mnemonicParsing="false" text="Mystery" />
+                  <CheckBox fx:id="criBoxN" layoutX="8.0" layoutY="194.0" mnemonicParsing="false" text="Crime" />
+                  <CheckBox fx:id="musBoxN" layoutX="8.0" layoutY="211.0" mnemonicParsing="false" text="Musical" />
+                  <CheckBox fx:id="advBoxN" layoutX="8.0" layoutY="228.0" mnemonicParsing="false" text="Adventure" />
+                  <CheckBox fx:id="docBoxN" layoutX="8.0" layoutY="245.0" mnemonicParsing="false" text="Documentary" />
+                  <CheckBox fx:id="hisBoxN" layoutX="8.0" layoutY="262.0" mnemonicParsing="false" text="Historical genre" />
+                  <CheckBox fx:id="othBoxN" layoutX="8.0" layoutY="279.0" mnemonicParsing="false" text="Other film genres" />
+                  <CheckBox fx:id="spoBoxN" layoutX="8.0" layoutY="296.0" mnemonicParsing="false" text="Sports films" />
+                  <CheckBox fx:id="famBoxN" layoutX="8.0" layoutY="314.0" mnemonicParsing="false" text="Family" />
+                  <CheckBox fx:id="melBoxN" layoutX="8.0" layoutY="331.0" mnemonicParsing="false" text="Melodrama" />
+                  <CheckBox fx:id="warBoxN" layoutX="8.0" layoutY="348.0" mnemonicParsing="false" text="War" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="savBtnN" layoutX="234.0" layoutY="275.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="canBtnN" layoutX="292.0" layoutY="275.0" mnemonicParsing="false" text="Cancel" />
+      <TextField fx:id="imlBarN" layoutX="33.0" layoutY="250.0" />
+      <Text fx:id="imlTexN" layoutX="33.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IMDB Link">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="filBarN" layoutX="419.0" layoutY="238.0" />
+      <Button fx:id="filPicN" layoutX="368.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" text="FILE" />
+      <TextField fx:id="timBarN" layoutX="419.0" layoutY="269.0" />
+      <Text fx:id="timTexN" layoutX="368.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

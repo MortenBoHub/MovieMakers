@@ -7,14 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MovieApplication extends Application {
-
-
+public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MovieApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Movie Application");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MovieMakerView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("H" +
+                "ker!");
         stage.setScene(scene);
         stage.show();
     }

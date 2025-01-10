@@ -9,8 +9,8 @@ module dk.easv.moviemakers {
 
     opens dk.easv.moviemakers to javafx.fxml;
     exports dk.easv.moviemakers;
-    exports dk.easv.moviemakers.GUI;
-    opens dk.easv.moviemakers.GUI to javafx.fxml;
+    //exports dk.easv.moviemakers.GUI;
+    //opens dk.easv.moviemakers.GUI to javafx.fxml;
     exports dk.easv.moviemakers.GUI.Controller;
     opens dk.easv.moviemakers.GUI.Controller to javafx.fxml;
 }

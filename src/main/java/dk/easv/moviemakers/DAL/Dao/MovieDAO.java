@@ -34,7 +34,9 @@ public class MovieDAO implements IMovieDataAccess {
                 String category = rs.getString("category");
                 float rating = rs.getFloat("rating");
                 float personalrating = rs.getFloat("personalrating");
-                Movies movie = new Movies(id, title, year, category, rating, personalrating);
+                //String filelink = rs.getString("filelink");
+                //int time = rs.getInt("time");
+                Movies movie = new Movies(id, title, year, category, rating, personalrating); //remember to add filelink?
                 allMovies.add(movie);
             }
             //Return the list of movies
@@ -50,12 +52,14 @@ public class MovieDAO implements IMovieDataAccess {
     @Override
     public Movies createMovie(Movies movie) throws Exception {
         // this method helps import the data from Movies to add to the song table in the sql server
+        //REMEMBER TO ADD FILELINK
         String sql = "INSERT INTO dbo.Movies (title, year, category, rating, personalrating) VALUES ( ?, ?, ?, ?, ?)";
         DBConnecter dbConnecter = new DBConnecter();
 
         try (Connection connection = dbConnecter.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
+            //REMEMBER TO ADD FILELINK
             stmt.setString(1, movie.gettitle());
             stmt.setInt(2, movie.getyear());
             stmt.setString(3, movie.getcategory());
@@ -83,12 +87,14 @@ public class MovieDAO implements IMovieDataAccess {
     @Override
     public void updateMovie(Movies movie) throws Exception {
         // this method helps update the data from the movie's tables in the sql server
+        //REMEMBER TO ADD FILELINK
         String sql = "UPDATE dbo.Movies SET title = ?, year = ?, category = ?, rating = ?, personalrating = ? WHERE id = ?";
         DBConnecter dbConnecter = new DBConnecter();
 
         try (Connection connection = dbConnecter.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
+            //REMEMBER TO ADD FILELINK
             stmt.setString(1, movie.gettitle());
             stmt.setInt(2, movie.getyear());
             stmt.setString(3, movie.getcategory());

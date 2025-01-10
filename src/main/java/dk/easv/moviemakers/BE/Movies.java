@@ -7,6 +7,8 @@ public class Movies {
     private String category;
     private float rating;
     private float personalrating;
+    private String filelink;
+    //private int time;
 
 
 
@@ -17,6 +19,8 @@ public class Movies {
         this.category = category;
         this.rating = rating;
         this.personalrating = personalrating;
+        this.filelink = filelink;
+        //this.time = time;
 
 
     }
@@ -44,5 +48,13 @@ public class Movies {
     public float getpersonalrating() {return this.personalrating;}
 
     public void setpersonalrating(float value) {this.personalrating = value;}
+
+    public String getfilelink() {return this.filelink;}
+
+    public void setfilelink(String value) {this.filelink = value;}
+
+    //public int getTime() {return this.time;}
+
+    //public void setTime(int value) {this.time = value;}
 
 }

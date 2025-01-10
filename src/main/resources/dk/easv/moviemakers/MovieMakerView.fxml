@@ -7,13 +7,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="maiWin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="maiWin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="plyBtn" layoutX="180.0" layoutY="14.0" mnemonicParsing="false" text="Play" />
-      <Button fx:id="newBtn" layoutX="259.0" layoutY="137.0" mnemonicParsing="false" text="New" />
-      <Button fx:id="editBtn" layoutX="319.0" layoutY="137.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="delBtn" layoutX="373.0" layoutY="137.0" mnemonicParsing="false" text="Delete" />
-      <TableView fx:id="maiTbl" layoutX="27.0" layoutY="170.0" prefHeight="276.0" prefWidth="692.0">
+      <Button fx:id="newBtn" layoutX="259.0" layoutY="125.0" mnemonicParsing="false" text="New" />
+      <Button fx:id="editBtn" layoutX="319.0" layoutY="125.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="delBtn" layoutX="373.0" layoutY="125.0" mnemonicParsing="false" text="Delete" />
+      <TableView fx:id="maiTbl" layoutX="27.0" layoutY="156.0" prefHeight="276.0" prefWidth="692.0">
         <columns>
           <TableColumn fx:id="movCol" prefWidth="255.0" text="Movie Name" />
           <TableColumn fx:id="relCol" prefWidth="82.0" text="Release Year" />
@@ -22,13 +22,14 @@
             <TableColumn fx:id="lasCol" prefWidth="130.0" text="Last seen" />
         </columns>
       </TableView>
-      <TextField fx:id="seaBar" layoutX="27.0" layoutY="137.0" prefHeight="25.0" prefWidth="154.0" />
+      <TextField fx:id="seaBar" layoutX="25.0" layoutY="125.0" prefHeight="25.0" prefWidth="154.0" />
       <ScrollPane layoutX="519.0" layoutY="14.0" prefHeight="123.0" prefWidth="200.0">
         <content>
           <AnchorPane fx:id="catTbl" minHeight="0.0" minWidth="0.0" prefHeight="109.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
       <TextField fx:id="curBar" layoutX="27.0" layoutY="14.0" />
-      <Button fx:id="seaBtn" layoutX="185.0" layoutY="137.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" text="Button" />
+      <Button fx:id="seaBtn" layoutX="185.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" text="Button" />
+      <Button layoutX="668.0" layoutY="437.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Close" />
    </children>
 </AnchorPane>

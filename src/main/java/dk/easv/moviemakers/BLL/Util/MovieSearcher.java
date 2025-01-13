@@ -29,5 +29,7 @@ public class MovieSearcher {
         return movie.getcategory().toLowerCase().contains(query.toLowerCase());
     }
 
+    //TODO add a method to filter movies by category(?)
+
 
 }

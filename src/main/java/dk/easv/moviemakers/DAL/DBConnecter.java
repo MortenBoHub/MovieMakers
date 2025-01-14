@@ -30,7 +30,7 @@ public class DBConnecter {
 
     }
 
-    //method to check whether connection to database is true or false
+    //Method to check whether connection to database is true or false
     public static void main(String[] args) throws Exception {
         DBConnecter dbConnecter = new DBConnecter();
 

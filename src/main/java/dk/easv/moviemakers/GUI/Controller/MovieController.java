@@ -2,13 +2,23 @@ package dk.easv.moviemakers.GUI.Controller;
 
 import dk.easv.moviemakers.BE.Movies;
 import dk.easv.moviemakers.GUI.Model.MovieMakerModel;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
+
+import java.awt.*;
+import java.io.File;
+import java.net.URI;
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -27,14 +37,16 @@ import java.util.ResourceBundle;
 
 public class MovieController implements Initializable {
 
-    //TODO: Check todos at the bottom
-
-
-    @FXML public Button plyBtn, newBtn, delBtn, editBtn, cloBtn, linkBtn;
-    @FXML public TableView maiTbl;
-    @FXML public TextField seaBar;
-    @FXML private Label currentLab;
-    @FXML private AnchorPane scrMen;
+    @FXML
+    public Button plyBtn, newBtn, delBtn, editBtn, cloBtn, linkBtn;
+    @FXML
+    public TableView maiTbl;
+    @FXML
+    public TextField seaBar;
+    @FXML
+    private Label currentLab;
+    @FXML
+    private AnchorPane scrMen;
 
     //Tableview Columns
     @FXML
@@ -48,7 +60,7 @@ public class MovieController implements Initializable {
     @FXML
     private TableColumn<Movies, Timestamp> lasCol;
 
-    //Category Checkboxes
+    //Category CheckBoxes
     @FXML
     private CheckBox comBox, draBox, horBox, actBox, fanBox, romBox, sciBox, thrBox, wesBox, aniBox, mysBox, criBox, musBox, advBox, docBox, hisBox, othBox, spoBox, famBox, melBox, warBox;
 
@@ -75,20 +87,41 @@ public class MovieController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Setup the columns in the tableview
+        //Set up the columns in the tableview
         movCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         relCol.setCellValueFactory(new PropertyValueFactory<>("year"));
         ratCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
         priCol.setCellValueFactory(new PropertyValueFactory<>("personalrating"));
         lasCol.setCellValueFactory(new PropertyValueFactory<>("lastview"));
 
+        comBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        draBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        horBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        actBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        fanBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        romBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        sciBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        thrBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        wesBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        aniBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        mysBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        criBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        musBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        advBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        docBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        hisBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        othBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        spoBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        famBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        melBox.setOnAction(_ -> filterMoviesBySelectedCategories());
+        warBox.setOnAction(_ -> filterMoviesBySelectedCategories());
 
         //Set the date format for the Lastview column
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         lasCol.setCellFactory(new Callback<TableColumn<Movies, Timestamp>, TableCell<Movies, Timestamp>>() {
             @Override
             public TableCell<Movies, Timestamp> call(TableColumn<Movies, Timestamp> column) {
-                return new TableCell<Movies, Timestamp>(){
+                return new TableCell<Movies, Timestamp>() {
                     @Override
                     protected void updateItem(Timestamp item, boolean empty) {
                         super.updateItem(item, empty);
@@ -122,7 +155,6 @@ public class MovieController implements Initializable {
         //Setup columns in the tableview
 
 
-
         //Connect tableview and ObservableList
         ObservableList<Movies> moviesList = movieMakerModel.getObservableList();
         if (moviesList != null && !moviesList.isEmpty()) {
@@ -130,7 +162,6 @@ public class MovieController implements Initializable {
         } else {
             System.out.println("ObservableList is empty or null.");
         }
-        //maiTbl.setItems(movieMakerModel.getObservableList());
 
         //Table view listener setup to show selected movie
         maiTbl.getSelectionModel().selectedItemProperty().addListener((_, _, newValue) -> {
@@ -151,65 +182,72 @@ public class MovieController implements Initializable {
             }
         });
 
+        Platform.runLater(() -> badMovieReminder());
 
     }
 
-    //Add listeners to the checkboxes
-    private void addCategoryCheckBoxListeners() {
-        comBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        draBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        horBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        actBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        fanBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        romBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        sciBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        thrBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        wesBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        aniBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        mysBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        criBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        musBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        advBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        docBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        hisBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        othBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        spoBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        famBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        melBox.setOnAction(event -> filterMoviesBySelectedCategories());
-        warBox.setOnAction(event -> filterMoviesBySelectedCategories());
+    //Movie Delete Reminder for "Bad Movies"
+    public void badMovieReminder() {
+        ObservableList<Movies> moviesList = movieMakerModel.getObservableList();
+        if (moviesList != null && !moviesList.isEmpty()) {
+
+            for (Movies movie : moviesList) {
+                LocalDateTime today = LocalDateTime.now();
+                LocalDateTime lastView = movie.getLastview().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                long yearsBetween = ChronoUnit.YEARS.between(lastView, today);
+                if (yearsBetween >= 2 && movie.getPersonalrating() < 6) {
+                    JOptionPane.showMessageDialog(null, "You haven't watched " + movie.getTitle() + " in over two years and your personal rating of it is below a 6. Consider deleting it.", "Bad Movie Reminder", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
     }
 
-    public Movies getSelectedMovie() {return selectedMovie;}
+
+    public Movies getSelectedMovie() {
+        return selectedMovie;
+    }
+
+    public void tableRefresh() {
+        System.out.println("Table Refreshed");
+        try {
+            movieMakerModel.refreshMovies();
+        } catch (Exception e) {
+            displayError(e);
+            e.printStackTrace();
+        }
+        ObservableList<Movies> currentMovies = movieMakerModel.getObservableList();
+        System.out.println("Number of movies in ObservableList: " + currentMovies.size());
+    }
 
     //Method to filter the tableview by categories that have been checkmarked
     private void filterMoviesBySelectedCategories() {
         try {
-            StringBuilder selectedCategories = new StringBuilder();
-            if (comBox.isSelected()) selectedCategories.append("Comedy,");
-            if (draBox.isSelected()) selectedCategories.append("Drama,");
-            if (horBox.isSelected()) selectedCategories.append("Horror,");
-            if (actBox.isSelected()) selectedCategories.append("Action,");
-            if (fanBox.isSelected()) selectedCategories.append("Fantasy,");
-            if (romBox.isSelected()) selectedCategories.append("Romance,");
-            if (sciBox.isSelected()) selectedCategories.append("Sci-Fi,");
-            if (thrBox.isSelected()) selectedCategories.append("Thriller,");
-            if (wesBox.isSelected()) selectedCategories.append("Western,");
-            if (aniBox.isSelected()) selectedCategories.append("Animation,");
-            if (mysBox.isSelected()) selectedCategories.append("Mystery,");
-            if (criBox.isSelected()) selectedCategories.append("Crime,");
-            if (musBox.isSelected()) selectedCategories.append("Musical,");
-            if (advBox.isSelected()) selectedCategories.append("Adventure,");
-            if (docBox.isSelected()) selectedCategories.append("Documentary,");
-            if (hisBox.isSelected()) selectedCategories.append("History,");
-            if (othBox.isSelected()) selectedCategories.append("Other,");
-            if (spoBox.isSelected()) selectedCategories.append("Sport,");
-            if (famBox.isSelected()) selectedCategories.append("Family,");
-            if (melBox.isSelected()) selectedCategories.append("Melodrama,");
-            if (warBox.isSelected()) selectedCategories.append("War,");
+            ArrayList<String> filters = new ArrayList<>();
+            if (comBox.isSelected()) filters.add("Comedy");
+            if (draBox.isSelected()) filters.add("Drama");
+            if (horBox.isSelected()) filters.add("Horror");
+            if (actBox.isSelected()) filters.add("Action");
+            if (fanBox.isSelected()) filters.add("Fantasy");
+            if (romBox.isSelected()) filters.add("Romance");
+            if (sciBox.isSelected()) filters.add("Sci-Fi");
+            if (thrBox.isSelected()) filters.add("Thriller");
+            if (wesBox.isSelected()) filters.add("Western");
+            if (aniBox.isSelected()) filters.add("Animation");
+            if (mysBox.isSelected()) filters.add("Mystery");
+            if (criBox.isSelected()) filters.add("Crime");
+            if (musBox.isSelected()) filters.add("Musical");
+            if (advBox.isSelected()) filters.add("Adventure");
+            if (docBox.isSelected()) filters.add("Documentary");
+            if (hisBox.isSelected()) filters.add("History");
+            if (othBox.isSelected()) filters.add("Other");
+            if (spoBox.isSelected()) filters.add("Sport");
+            if (famBox.isSelected()) filters.add("Family");
+            if (melBox.isSelected()) filters.add("Melodrama");
+            if (warBox.isSelected()) filters.add("War");
 
-            if (selectedCategories.length() > 0) {
-                selectedCategories.setLength(selectedCategories.length() - 1);
-                movieMakerModel.filterMoviesByCategory(selectedCategories.toString());
+
+            if (!filters.isEmpty()) {
+                movieMakerModel.filterMoviesByCategory(filters);
             } else {
                 movieMakerModel.refreshMovies(); // Show all movies if no category is selected
             }
@@ -236,20 +274,27 @@ public class MovieController implements Initializable {
         stage.show();
     }
 
+    @FXML
     private void onEditMovieButtonPressed() throws IOException {
         //Method to open the edit movie dialogue window
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditMovieView.fxml"));
-        Parent root = fxmlLoader.load();
+        if (maiTbl.getSelectionModel().getSelectedItem() != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/EditMovieView.fxml"));
+            Parent root = fxmlLoader.load();
 
-        //Get the controller and set the controller
-        //EditMovieController editMovieController = fxmlLoader.getController();
-        //editMovieController½.setMovieController(this);
+            //Get the controller and set the controller
+            EditMovieController editMovieController = fxmlLoader.getController();
+            editMovieController.setMovieController(this);
 
-        Stage stage = new Stage();
-        stage.setTitle("Edit Movie");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+            Stage stage = new Stage();
+            stage.setTitle("Edit Movie");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } else {
+            JOptionPane.showMessageDialog(null, "No movie selected. Please select a movie to edit.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }
 
     @FXML
@@ -270,21 +315,48 @@ public class MovieController implements Initializable {
 
     }
 
-    public void tableRefresh() {
-        System.out.println("Table Refreshed");
-        try {
-            movieMakerModel.refreshMovies();
-        } catch (Exception e) {
-            displayError(e);
-            e.printStackTrace();
+
+    @FXML
+    private void onPlayButtonPressed() {
+        //Method to play the selected movie
+        Movies selectedMovie = (Movies) maiTbl.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null) {
+            File file = new File("src/main/resources/" + selectedMovie.getAddress());
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().open(file);
+                    selectedMovie.setLastview(Timestamp.valueOf(LocalDateTime.now()));
+                    movieMakerModel.updateMovie(selectedMovie);
+                    tableRefresh();
+                } catch (IOException e) {
+                    displayError(e);
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    displayError(e);
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No movie selected. Please select a movie to play.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        ObservableList<Movies> currentMovies = movieMakerModel.getObservableList();
-        System.out.println("Number of movies in ObservableList: " + currentMovies.size());
     }
 
-    //TODO: Implement the play button pressed method, idk what it should do exactly yet
-    //TODO: Also find a way to implement the ability to open a link to the movie in the browser
-    //TODO: Also also find a way to implement the ability to filter the movies by Categories
+    @FXML
+    private void onLinkButtonPressed() {
+        Movies selectedMovie = (Movies) maiTbl.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null) {
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().browse(new URI(selectedMovie.getFilelink()));
+                } catch (Exception e) {
+                    displayError(e);
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No movie selected. Please select a movie to open the link.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
 
+    }
 }

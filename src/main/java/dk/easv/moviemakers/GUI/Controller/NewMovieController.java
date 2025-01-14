@@ -21,16 +21,26 @@ import java.time.format.DateTimeFormatter;
 public class NewMovieController {
 
 
-    @FXML private TextField titBarN;
-    @FXML private TextField yeaBarN;
-    @FXML private TextField perBarN;
-    @FXML private TextField imrBarN;
-    @FXML private TextField imlBarN;
-    @FXML private TextField filBarN;
-    @FXML private TextField timBarN;
-    @FXML private Button filPicN;
-    @FXML private Button savBtnN;
-    @FXML private Button canBtnN;
+    @FXML
+    private TextField titBarN;
+    @FXML
+    private TextField yeaBarN;
+    @FXML
+    private TextField perBarN;
+    @FXML
+    private TextField imrBarN;
+    @FXML
+    private TextField imlBarN;
+    @FXML
+    private TextField filBarN;
+    @FXML
+    private TextField timBarN;
+    @FXML
+    private Button filPicN; //Button is never accessed but Action Event calls the FilePickerPressed method
+    @FXML
+    private Button savBtnN;
+    @FXML
+    private Button canBtnN;
 
     //Category Checkboxes
     @FXML
@@ -44,6 +54,7 @@ public class NewMovieController {
         try {
             movieMakerModel = new MovieMakerModel();
         } catch (Exception e) {
+            displayError(e);
             e.printStackTrace();
         }
     }
@@ -156,7 +167,7 @@ public class NewMovieController {
         if (warBoxN.isSelected()) category.append("War,");
 
         // Remove the trailing comma
-        if (category.length() > 0) {
+        if (!category.isEmpty()) {
             category.setLength(category.length() - 1);
         }
 
@@ -196,7 +207,8 @@ public class NewMovieController {
         String currentText = filBarN.getText();
         if (!currentText.toLowerCase().endsWith(".mp4")) {
             currentText += ".mp4";
-        } filBarN.setText(currentText);
+        }
+        filBarN.setText(currentText);
     }
 
 
@@ -218,7 +230,6 @@ public class NewMovieController {
 
         }
     }
-
 
 
 }

@@ -6,6 +6,7 @@ import dk.easv.moviemakers.DAL.Dao.MovieDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieMakerModel {
@@ -33,8 +34,8 @@ public class MovieMakerModel {
         moviesToBeViewed.addAll(searchResult);
     }
 
-    public void filterMoviesByCategory(String category) throws Exception {
-        List<Movies> filteredMovies = movieManager.filterMoviesByCategory(category);
+    public void filterMoviesByCategory(ArrayList<String> filters) throws Exception {
+        List<Movies> filteredMovies = movieManager.filterMoviesByCategory(filters);
         moviesToBeViewed.clear();
         moviesToBeViewed.addAll(filteredMovies);
     }
@@ -54,15 +55,16 @@ public class MovieMakerModel {
             int index = moviesToBeViewed.indexOf(updatedMovie);
 
             if (index != -1) {
-
                 Movies m = moviesToBeViewed.get(index);
                 m.setTitle(updatedMovie.getTitle());
                 m.setYear(updatedMovie.getYear());
                 m.setCategory(updatedMovie.getCategory());
                 m.setRating(updatedMovie.getRating());
                 m.setPersonalrating(updatedMovie.getPersonalrating());
-                //REMEMBER FILELINK(?) FOR THE DATABASE
-                //TIME TOO
+                m.setFilelink(updatedMovie.getFilelink());
+                m.setAddress(updatedMovie.getAddress());
+                m.setLastview(updatedMovie.getLastview());
+
             } else {
                 throw new Exception("Movie not found in the ObservableList");
             }

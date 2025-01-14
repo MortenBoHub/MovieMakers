@@ -75,7 +75,7 @@ public class MovieDAO implements IMovieDataAccess {
             int id = 0;
 
             //If there is a key, set the id to the key
-            if(rs.next()) {
+            if (rs.next()) {
                 id = rs.getInt(1);
             }
             //Create movie and send up the layers
@@ -89,7 +89,7 @@ public class MovieDAO implements IMovieDataAccess {
     @Override
     public void updateMovie(Movies movie) throws Exception {
         // this method helps update the data from the movie's tables in the sql server
-        String sql = "UPDATE dbo.Movies SET title = ?, year = ?, category = ?, rating = ?, personalrating = ?, filelink = ?, address = ?, WHERE id = ?";
+        String sql = "UPDATE dbo.Movies SET title = ?, year = ?, category = ?, rating = ?, personalrating = ?, filelink = ?, address = ?, lastview = ? WHERE id = ?";
         DBConnecter dbConnecter = new DBConnecter();
 
         try (Connection connection = dbConnecter.getConnection()) {
@@ -130,7 +130,6 @@ public class MovieDAO implements IMovieDataAccess {
             throw new Exception("Could not get movies from database.", ex);
         }
     }
-
 
 
 }

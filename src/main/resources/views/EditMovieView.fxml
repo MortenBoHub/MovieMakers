@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="ancE" prefHeight="317.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.moviemakers.NewMovieView">
+<AnchorPane fx:id="ancE" prefHeight="317.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.moviemakers.GUI.Controller.EditMovieController">
    <children>
       <TextField fx:id="titBarE" layoutX="33.0" layoutY="52.0" />
       <TextField fx:id="yeaBarE" layoutX="33.0" layoutY="102.0" />
@@ -73,15 +73,15 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="savBtnE" layoutX="234.0" layoutY="275.0" mnemonicParsing="false" text="Save" />
-      <Button fx:id="canBtnE" layoutX="292.0" layoutY="275.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="savBtnE" layoutX="234.0" layoutY="275.0" mnemonicParsing="false" onAction="#onEdit" text="Save" />
+      <Button fx:id="canBtnE" layoutX="292.0" layoutY="275.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" text="Cancel" />
       <TextField fx:id="imlBarE" layoutX="33.0" layoutY="250.0" />
       <Text fx:id="imlTexE" layoutX="33.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IMDB Link">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="filBarE" layoutX="419.0" layoutY="238.0" />
+      <TextField fx:id="filBarE" layoutX="419.0" layoutY="238.0" onAction="#onFilePickerPressed" />
       <Button fx:id="filPicE" layoutX="368.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" text="FILE" />
       <TextField fx:id="timBarE" layoutX="419.0" layoutY="269.0" />
       <Text fx:id="timTexE" layoutX="368.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:">

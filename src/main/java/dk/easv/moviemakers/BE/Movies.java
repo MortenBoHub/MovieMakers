@@ -12,11 +12,9 @@ public class Movies {
     private String filelink;
     private Timestamp lastview;
     private String address;
-    //private int time;
 
 
-
-    public Movies(int id, String title, int year, String categories, float rating, float personalrating, String filelink, Timestamp lastview, String address){
+    public Movies(int id, String title, int year, String categories, float rating, float personalrating, String filelink, Timestamp lastview, String address) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -26,40 +24,80 @@ public class Movies {
         this.filelink = filelink;
         this.lastview = lastview;
         this.address = address;
-        //this.time = time;
 
     }
 
     //Getters and setters
-    public int getId() {return this.id;}
-    public void setId(int value) {this.id = value;}
+    public int getId() {
+        return this.id;
+    }
 
-    public String getTitle() {return this.title;}
-    public void setTitle(String value) {this.title = value;}
+    public void setId(int value) {
+        this.id = value;
+    }
 
-    public int getYear() {return this.year;}
-    public void setYear(int value) {this.year = value;}
+    public String getTitle() {
+        return this.title;
+    }
 
-    public String getCategory() {return this.categories;}
-    public void setCategory(String value) {this.categories = value;}
+    public void setTitle(String value) {
+        this.title = value;
+    }
 
-    public float getRating() {return this.rating;}
-    public void setRating(float value) {this.rating = value;}
+    public int getYear() {
+        return this.year;
+    }
 
-    public float getPersonalrating() {return this.personalrating;}
-    public void setPersonalrating(float value) {this.personalrating = value;}
+    public void setYear(int value) {
+        this.year = value;
+    }
 
-    public String getFilelink() {return this.filelink;}
-    public void setFilelink(String value) {this.filelink = value;}
+    public String getCategory() {
+        return this.categories;
+    }
 
-    public Timestamp getLastview() {return this.lastview;}
-    public void setLastview(Timestamp lastview) {this.lastview = lastview;}
+    public void setCategory(String value) {
+        this.categories = value;
+    }
 
-    public String getAddress() {return address; }
-    public void setAddress(String address) {this.address = address; }
+    public float getRating() {
+        return this.rating;
+    }
 
-    //public int getTime() {return this.time;}
+    public void setRating(float value) {
+        this.rating = value;
+    }
 
-    //public void setTime(int value) {this.time = value;}
+    public float getPersonalrating() {
+        return this.personalrating;
+    }
+
+    public void setPersonalrating(float value) {
+        this.personalrating = value;
+    }
+
+    public String getFilelink() {
+        return this.filelink;
+    }
+
+    public void setFilelink(String value) {
+        this.filelink = value;
+    }
+
+    public Timestamp getLastview() {
+        return this.lastview;
+    }
+
+    public void setLastview(Timestamp lastview) {
+        this.lastview = lastview;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
 }

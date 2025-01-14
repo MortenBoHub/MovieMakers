@@ -3,6 +3,7 @@ package dk.easv.moviemakers.DAL.Dao;
 import dk.easv.moviemakers.BE.Movies;
 import dk.easv.moviemakers.DAL.DBConnecter;
 import dk.easv.moviemakers.DAL.IMovieDataAccess;
+import microsoft.sql.DateTimeOffset;
 
 import java.sql.*;
 import java.io.IOException;
@@ -34,9 +35,10 @@ public class MovieDAO implements IMovieDataAccess {
                 String category = rs.getString("category");
                 float rating = rs.getFloat("rating");
                 float personalrating = rs.getFloat("personalrating");
-                //String filelink = rs.getString("filelink");
-                //int time = rs.getInt("time");
-                Movies movie = new Movies(id, title, year, category, rating, personalrating); //remember to add filelink?
+                String filelink = rs.getString("filelink");
+                Timestamp lastview = rs.getTimestamp("lastview");
+                String address = rs.getString("address");
+                Movies movie = new Movies(id, title, year, category, rating, personalrating, filelink, lastview, address);
                 allMovies.add(movie);
             }
             //Return the list of movies
@@ -52,19 +54,20 @@ public class MovieDAO implements IMovieDataAccess {
     @Override
     public Movies createMovie(Movies movie) throws Exception {
         // this method helps import the data from Movies to add to the song table in the sql server
-        //REMEMBER TO ADD FILELINK
-        String sql = "INSERT INTO dbo.Movies (title, year, category, rating, personalrating) VALUES ( ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO dbo.Movies (title, year, category, rating, personalrating, filelink, address) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
         DBConnecter dbConnecter = new DBConnecter();
 
         try (Connection connection = dbConnecter.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            //REMEMBER TO ADD FILELINK
             stmt.setString(1, movie.gettitle());
             stmt.setInt(2, movie.getyear());
             stmt.setString(3, movie.getcategory());
             stmt.setFloat(4, movie.getrating());
             stmt.setFloat(5, movie.getpersonalrating());
+            stmt.setString(6, movie.getfilelink());
+            stmt.setString(7, movie.getAddress());
+            //stmt.setTimestamp(8, movie.getLastview());
 
             //Run the SQL statement
             stmt.executeUpdate();
@@ -77,7 +80,7 @@ public class MovieDAO implements IMovieDataAccess {
                 id = rs.getInt(1);
             }
             //Create movie and send up the layers
-            return new Movies(id, movie.gettitle(), movie.getyear(), movie.getcategory(), movie.getrating(), movie.getpersonalrating());
+            return new Movies(id, movie.gettitle(), movie.getyear(), movie.getcategory(), movie.getrating(), movie.getpersonalrating(), movie.getfilelink(), movie.getLastview(), movie.getAddress());
 
         } catch (SQLException ex) {
             throw new Exception("Could not get movies from database.", ex);
@@ -87,20 +90,21 @@ public class MovieDAO implements IMovieDataAccess {
     @Override
     public void updateMovie(Movies movie) throws Exception {
         // this method helps update the data from the movie's tables in the sql server
-        //REMEMBER TO ADD FILELINK
-        String sql = "UPDATE dbo.Movies SET title = ?, year = ?, category = ?, rating = ?, personalrating = ? WHERE id = ?";
+        String sql = "UPDATE dbo.Movies SET title = ?, year = ?, category = ?, rating = ?, personalrating = ?, filelink = ?, address = ?, WHERE id = ?";
         DBConnecter dbConnecter = new DBConnecter();
 
         try (Connection connection = dbConnecter.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            //REMEMBER TO ADD FILELINK
             stmt.setString(1, movie.gettitle());
             stmt.setInt(2, movie.getyear());
             stmt.setString(3, movie.getcategory());
             stmt.setFloat(4, movie.getrating());
             stmt.setFloat(5, movie.getpersonalrating());
-            stmt.setInt(6, movie.getid());
+            stmt.setString(6, movie.getfilelink());
+            stmt.setString(7, movie.getAddress());
+            stmt.setInt(8, movie.getid());
+            // stmt.setTimestamp(9, new Timestamp(movie.getLastview().getTime()));
 
             //Run the SQL statement
             stmt.executeUpdate();

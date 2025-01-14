@@ -26,6 +26,11 @@ public class MovieManager {
           return movieSearcher.search(allMovies, query);
      }
 
+     public List<Movies> filterMoviesByCategory(String category) throws Exception {
+          List<Movies> allMovies = getAllMovies();
+          return movieSearcher.filterByCategory(allMovies, category);
+     }
+
      public Movies createMovie(Movies newMovie) throws Exception {
           return MovieDAO.createMovie(newMovie);
      }

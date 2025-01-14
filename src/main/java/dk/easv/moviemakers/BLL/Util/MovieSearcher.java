@@ -29,7 +29,16 @@ public class MovieSearcher {
         return movie.getcategory().toLowerCase().contains(query.toLowerCase());
     }
 
-    //TODO add a method to filter movies by category(?)
+    // Method to filter movies by category
+    public List<Movies> filterByCategory(List<Movies> searchBase, String category) {
+        List<Movies> filteredMovies = new ArrayList<>();
 
+        for (Movies movie : searchBase) {
+            if (movie.getcategory().equalsIgnoreCase(category)) {
+                filteredMovies.add(movie);
+            }
+        }
+        return filteredMovies;
+    }
 
 }

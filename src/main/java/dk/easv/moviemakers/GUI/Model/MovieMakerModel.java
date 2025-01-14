@@ -33,6 +33,12 @@ public class MovieMakerModel {
         moviesToBeViewed.addAll(searchResult);
     }
 
+    public void filterMoviesByCategory(String category) throws Exception {
+        List<Movies> filteredMovies = movieManager.filterMoviesByCategory(category);
+        moviesToBeViewed.clear();
+        moviesToBeViewed.addAll(filteredMovies);
+    }
+
     public void createMovie(Movies newMovie) throws Exception {
         Movies movieCreated = movieManager.createMovie(newMovie);
         moviesToBeViewed.add(movieCreated);

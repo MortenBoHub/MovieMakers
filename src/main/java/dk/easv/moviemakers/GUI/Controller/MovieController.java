@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.time.OffsetDateTime;
@@ -26,49 +27,29 @@ public class MovieController implements Initializable {
 
     //TODO: Check todos at the bottom
 
-    @FXML
-    private Button plyBtn;
-    private Button newBtn;
-    private Button delBtn;
-    private Button editBtn;
-    private Button cloBtn;
-    private Button linkBtn;
-    private TableView maiTbl;
-    private TextField seaBar;
-    private Label currentLab;
-    private AnchorPane scrMen;
+
+    @FXML public Button plyBtn, newBtn, delBtn, editBtn, cloBtn, linkBtn;
+    @FXML public TableView maiTbl;
+    @FXML public TextField seaBar;
+    @FXML private Label currentLab;
+    @FXML private AnchorPane scrMen;
 
     //Tableview Columns
     @FXML
     private TableColumn<Movies, String> movCol;
+    @FXML
     private TableColumn<Movies, Integer> relCol;
+    @FXML
     private TableColumn<Movies, Float> ratCol;
+    @FXML
     private TableColumn<Movies, Float> priCol;
+    @FXML
     private TableColumn<Movies, OffsetDateTime> lasCol;
 
     //Category Checkboxes
     @FXML
-    private CheckBox comBox;
-    private CheckBox draBox;
-    private CheckBox horBox;
-    private CheckBox actBox;
-    private CheckBox fanBox;
-    private CheckBox romBox;
-    private CheckBox sciBox;
-    private CheckBox thrBox;
-    private CheckBox wesBox;
-    private CheckBox aniBox;
-    private CheckBox mysBox;
-    private CheckBox criBox;
-    private CheckBox musBox;
-    private CheckBox advBox;
-    private CheckBox docBox;
-    private CheckBox hisBox;
-    private CheckBox othBox;
-    private CheckBox spoBox;
-    private CheckBox famBox;
-    private CheckBox melBox;
-    private CheckBox warBox;
+    private CheckBox comBox, draBox, horBox, actBox, fanBox, romBox, sciBox, thrBox, wesBox, aniBox, mysBox, criBox, musBox, advBox, docBox, hisBox, othBox, spoBox, famBox, melBox, warBox;
+
 
     private MovieMakerModel movieMakerModel;
 
@@ -120,7 +101,13 @@ public class MovieController implements Initializable {
         });
 
         //Connect tableview and ObservableList
-        maiTbl.setItems(movieMakerModel.getObservableList());
+        ObservableList<Movies> moviesList = movieMakerModel.getObservableList();
+        if (moviesList != null && !moviesList.isEmpty()) {
+            maiTbl.setItems(moviesList);
+        } else {
+            System.out.println("ObservableList is empty or null.");
+        }
+        /*maiTbl.setItems(movieMakerModel.getObservableList());*/
 
         //Table view listener setup to show selected movie
         maiTbl.getSelectionModel().selectedItemProperty().addListener((_, _, newValue) -> {
@@ -140,9 +127,74 @@ public class MovieController implements Initializable {
                 e.printStackTrace();
             }
         });
+
+
+    }
+
+    //Add listeners to the checkboxes
+    private void addCategoryCheckBoxListeners() {
+        comBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        draBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        horBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        actBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        fanBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        romBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        sciBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        thrBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        wesBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        aniBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        mysBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        criBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        musBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        advBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        docBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        hisBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        othBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        spoBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        famBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        melBox.setOnAction(event -> filterMoviesBySelectedCategories());
+        warBox.setOnAction(event -> filterMoviesBySelectedCategories());
     }
 
     public Movies getSelectedMovie() {return selectedMovie;}
+
+    //Method to filter the tableview by categories that have been checkmarked
+    private void filterMoviesBySelectedCategories() {
+        try {
+            StringBuilder selectedCategories = new StringBuilder();
+            if (comBox.isSelected()) selectedCategories.append("Comedy,");
+            if (draBox.isSelected()) selectedCategories.append("Drama,");
+            if (horBox.isSelected()) selectedCategories.append("Horror,");
+            if (actBox.isSelected()) selectedCategories.append("Action,");
+            if (fanBox.isSelected()) selectedCategories.append("Fantasy,");
+            if (romBox.isSelected()) selectedCategories.append("Romance,");
+            if (sciBox.isSelected()) selectedCategories.append("Sci-Fi,");
+            if (thrBox.isSelected()) selectedCategories.append("Thriller,");
+            if (wesBox.isSelected()) selectedCategories.append("Western,");
+            if (aniBox.isSelected()) selectedCategories.append("Animation,");
+            if (mysBox.isSelected()) selectedCategories.append("Mystery,");
+            if (criBox.isSelected()) selectedCategories.append("Crime,");
+            if (musBox.isSelected()) selectedCategories.append("Musical,");
+            if (advBox.isSelected()) selectedCategories.append("Adventure,");
+            if (docBox.isSelected()) selectedCategories.append("Documentary,");
+            if (hisBox.isSelected()) selectedCategories.append("History,");
+            if (othBox.isSelected()) selectedCategories.append("Other,");
+            if (spoBox.isSelected()) selectedCategories.append("Sport,");
+            if (famBox.isSelected()) selectedCategories.append("Family,");
+            if (melBox.isSelected()) selectedCategories.append("Melodrama,");
+            if (warBox.isSelected()) selectedCategories.append("War,");
+
+            if (selectedCategories.length() > 0) {
+                selectedCategories.setLength(selectedCategories.length() - 1);
+                movieMakerModel.filterMoviesByCategory(selectedCategories.toString());
+            } else {
+                movieMakerModel.refreshMovies(); // Show all movies if no category is selected
+            }
+        } catch (Exception e) {
+            displayError(e);
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void onNewMovieButtonPressed() throws IOException {
@@ -167,8 +219,8 @@ public class MovieController implements Initializable {
         Parent root = fxmlLoader.load();
 
         //Get the controller and set the controller
-        EditMovieController editMovieController = fxmlLoader.getController();
-        editMovieController.setMovieController(this);
+        //EditMovieController editMovieController = fxmlLoader.getController();
+        //editMovieController½.setMovieController(this);
 
         Stage stage = new Stage();
         stage.setTitle("Edit Movie");

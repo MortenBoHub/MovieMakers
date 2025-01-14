@@ -16,11 +16,13 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.time.OffsetDateTime;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 public class MovieController implements Initializable {
@@ -44,7 +46,7 @@ public class MovieController implements Initializable {
     @FXML
     private TableColumn<Movies, Float> priCol;
     @FXML
-    private TableColumn<Movies, OffsetDateTime> lasCol;
+    private TableColumn<Movies, Timestamp> lasCol;
 
     //Category Checkboxes
     @FXML
@@ -79,26 +81,47 @@ public class MovieController implements Initializable {
         ratCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
         priCol.setCellValueFactory(new PropertyValueFactory<>("personalrating"));
         lasCol.setCellValueFactory(new PropertyValueFactory<>("lastview"));
-        //IMPLEMENT FILELINK
+
 
         //Set the date format for the Lastview column
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        lasCol.setCellFactory(new Callback<TableColumn<Movies, OffsetDateTime>, TableCell<Movies, OffsetDateTime>>() {
+        lasCol.setCellFactory(new Callback<TableColumn<Movies, Timestamp>, TableCell<Movies, Timestamp>>() {
             @Override
-            public TableCell<Movies, OffsetDateTime> call(TableColumn<Movies, OffsetDateTime> column) {
-                return new TableCell<Movies, OffsetDateTime>() {
+            public TableCell<Movies, Timestamp> call(TableColumn<Movies, Timestamp> column) {
+                return new TableCell<Movies, Timestamp>(){
                     @Override
-                    protected void updateItem(OffsetDateTime item, boolean empty) {
+                    protected void updateItem(Timestamp item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty || item == null) {
                             setText(null);
                         } else {
-                            setText(item.format(formatter));
+                            LocalDateTime today = LocalDateTime.now();
+                            LocalDateTime lastView = item.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                            long daysBetween = ChronoUnit.DAYS.between(lastView, today);
+
+                            if (daysBetween > 1) {
+                                if (daysBetween > 365) {
+                                    long years = daysBetween / 365;
+                                    long days = daysBetween % 365;
+                                    setText(years + "Y " + days + "D Ago");
+                                } else {
+                                    long hours = ChronoUnit.HOURS.between(lastView, today) % 24;
+                                    setText(daysBetween + "D " + hours + "H Ago");
+                                }
+                            } else {
+                                long hours = ChronoUnit.HOURS.between(lastView, today);
+                                long minutes = ChronoUnit.MINUTES.between(lastView, today) % 60;
+                                setText(hours + "H " + minutes + "M Ago");
+                            }
                         }
                     }
                 };
             }
         });
+
+        //Setup columns in the tableview
+
+
 
         //Connect tableview and ObservableList
         ObservableList<Movies> moviesList = movieMakerModel.getObservableList();
@@ -107,14 +130,14 @@ public class MovieController implements Initializable {
         } else {
             System.out.println("ObservableList is empty or null.");
         }
-        /*maiTbl.setItems(movieMakerModel.getObservableList());*/
+        //maiTbl.setItems(movieMakerModel.getObservableList());
 
         //Table view listener setup to show selected movie
         maiTbl.getSelectionModel().selectedItemProperty().addListener((_, _, newValue) -> {
             if (newValue != null) {
                 selectedMovie = (Movies) newValue;
-                System.out.println("Selected Movie: " + selectedMovie.gettitle());
-                currentLab.setText("Selected: " + selectedMovie.gettitle());
+                System.out.println("Selected Movie: " + selectedMovie.getTitle());
+                currentLab.setText("Selected: " + selectedMovie.getTitle());
             }
         });
 

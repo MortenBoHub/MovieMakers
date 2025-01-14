@@ -173,6 +173,11 @@ public class NewMovieController {
         System.out.println("New Movie created: " + newMovie);
 
         //Refresh
+        if (movieController != null) {
+            movieController.tableRefresh();
+        }
+
+        //Close the window
         Stage stage = (Stage) savBtnN.getScene().getWindow();
         stage.close();
 

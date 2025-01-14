@@ -31,29 +31,29 @@ public class Movies {
     }
 
     //Getters and setters
-    public int getid() {return this.id;}
-    public void setid(int value) {this.id = value;}
+    public int getId() {return this.id;}
+    public void setId(int value) {this.id = value;}
 
-    public String gettitle() {return this.title;}
-    public void settitle(String value) {this.title = value;}
+    public String getTitle() {return this.title;}
+    public void setTitle(String value) {this.title = value;}
 
-    public int getyear() {return this.year;}
-    public void setyear(int value) {this.year = value;}
+    public int getYear() {return this.year;}
+    public void setYear(int value) {this.year = value;}
 
-    public String getcategory() {return this.categories;}
-    public void setcategory(String value) {this.categories = value;}
+    public String getCategory() {return this.categories;}
+    public void setCategory(String value) {this.categories = value;}
 
-    public float getrating() {return this.rating;}
-    public void setrating(float value) {this.rating = value;}
+    public float getRating() {return this.rating;}
+    public void setRating(float value) {this.rating = value;}
 
-    public float getpersonalrating() {return this.personalrating;}
-    public void setpersonalrating(float value) {this.personalrating = value;}
+    public float getPersonalrating() {return this.personalrating;}
+    public void setPersonalrating(float value) {this.personalrating = value;}
 
-    public String getfilelink() {return this.filelink;}
-    public void setfilelink(String value) {this.filelink = value;}
+    public String getFilelink() {return this.filelink;}
+    public void setFilelink(String value) {this.filelink = value;}
 
     public Timestamp getLastview() {return this.lastview;}
-    public void setLastview(Timestamp value) {this.lastview = value;}
+    public void setLastview(Timestamp lastview) {this.lastview = lastview;}
 
     public String getAddress() {return address; }
     public void setAddress(String address) {this.address = address; }

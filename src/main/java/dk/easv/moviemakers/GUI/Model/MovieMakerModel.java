@@ -56,11 +56,11 @@ public class MovieMakerModel {
             if (index != -1) {
 
                 Movies m = moviesToBeViewed.get(index);
-                m.settitle(updatedMovie.gettitle());
-                m.setyear(updatedMovie.getyear());
-                m.setcategory(updatedMovie.getcategory());
-                m.setrating(updatedMovie.getrating());
-                m.setpersonalrating(updatedMovie.getpersonalrating());
+                m.setTitle(updatedMovie.getTitle());
+                m.setYear(updatedMovie.getYear());
+                m.setCategory(updatedMovie.getCategory());
+                m.setRating(updatedMovie.getRating());
+                m.setPersonalrating(updatedMovie.getPersonalrating());
                 //REMEMBER FILELINK(?) FOR THE DATABASE
                 //TIME TOO
             } else {
@@ -72,4 +72,20 @@ public class MovieMakerModel {
             throw new Exception("Failed to update the movie: " + e.getMessage(), e);
         }
     }
+
+    public void deleteMovies(Movies selectedMovie) throws Exception {
+        //Delete from the database through the layers
+        movieManager.deleteMovie(selectedMovie);
+
+        //Remove from the ObservableList
+        moviesToBeViewed.remove(selectedMovie);
+    }
+
+    public void refreshMovies() throws Exception {
+        //Method to refresh the tableview with the method from the manager
+        moviesToBeViewed.clear();
+        moviesToBeViewed.addAll(movieManager.getAllMovies());
+    }
+
+
 }

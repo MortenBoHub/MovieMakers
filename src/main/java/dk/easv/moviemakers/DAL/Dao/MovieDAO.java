@@ -3,7 +3,6 @@ package dk.easv.moviemakers.DAL.Dao;
 import dk.easv.moviemakers.BE.Movies;
 import dk.easv.moviemakers.DAL.DBConnecter;
 import dk.easv.moviemakers.DAL.IMovieDataAccess;
-import microsoft.sql.DateTimeOffset;
 
 import java.sql.*;
 import java.io.IOException;
@@ -54,20 +53,20 @@ public class MovieDAO implements IMovieDataAccess {
     @Override
     public Movies createMovie(Movies movie) throws Exception {
         // this method helps import the data from Movies to add to the song table in the sql server
-        String sql = "INSERT INTO dbo.Movies (title, year, category, rating, personalrating, filelink, address) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO dbo.Movies (title, year, category, rating, personalrating, filelink, address, lastview) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
         DBConnecter dbConnecter = new DBConnecter();
 
         try (Connection connection = dbConnecter.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            stmt.setString(1, movie.gettitle());
-            stmt.setInt(2, movie.getyear());
-            stmt.setString(3, movie.getcategory());
-            stmt.setFloat(4, movie.getrating());
-            stmt.setFloat(5, movie.getpersonalrating());
-            stmt.setString(6, movie.getfilelink());
+            stmt.setString(1, movie.getTitle());
+            stmt.setInt(2, movie.getYear());
+            stmt.setString(3, movie.getCategory());
+            stmt.setFloat(4, movie.getRating());
+            stmt.setFloat(5, movie.getPersonalrating());
+            stmt.setString(6, movie.getFilelink());
             stmt.setString(7, movie.getAddress());
-            //stmt.setTimestamp(8, movie.getLastview());
+            stmt.setTimestamp(8, movie.getLastview());
 
             //Run the SQL statement
             stmt.executeUpdate();
@@ -80,7 +79,7 @@ public class MovieDAO implements IMovieDataAccess {
                 id = rs.getInt(1);
             }
             //Create movie and send up the layers
-            return new Movies(id, movie.gettitle(), movie.getyear(), movie.getcategory(), movie.getrating(), movie.getpersonalrating(), movie.getfilelink(), movie.getLastview(), movie.getAddress());
+            return new Movies(id, movie.getTitle(), movie.getYear(), movie.getCategory(), movie.getRating(), movie.getPersonalrating(), movie.getFilelink(), movie.getLastview(), movie.getAddress());
 
         } catch (SQLException ex) {
             throw new Exception("Could not get movies from database.", ex);
@@ -96,15 +95,15 @@ public class MovieDAO implements IMovieDataAccess {
         try (Connection connection = dbConnecter.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            stmt.setString(1, movie.gettitle());
-            stmt.setInt(2, movie.getyear());
-            stmt.setString(3, movie.getcategory());
-            stmt.setFloat(4, movie.getrating());
-            stmt.setFloat(5, movie.getpersonalrating());
-            stmt.setString(6, movie.getfilelink());
+            stmt.setString(1, movie.getTitle());
+            stmt.setInt(2, movie.getYear());
+            stmt.setString(3, movie.getCategory());
+            stmt.setFloat(4, movie.getRating());
+            stmt.setFloat(5, movie.getPersonalrating());
+            stmt.setString(6, movie.getFilelink());
             stmt.setString(7, movie.getAddress());
-            stmt.setInt(8, movie.getid());
-            // stmt.setTimestamp(9, new Timestamp(movie.getLastview().getTime()));
+            stmt.setTimestamp(8, movie.getLastview());
+            stmt.setInt(9, movie.getId());
 
             //Run the SQL statement
             stmt.executeUpdate();
@@ -122,7 +121,7 @@ public class MovieDAO implements IMovieDataAccess {
         try (Connection connection = dbConnecter.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            stmt.setInt(1, movie.getid());
+            stmt.setInt(1, movie.getId());
 
             //Run the SQL statement
             stmt.executeUpdate();

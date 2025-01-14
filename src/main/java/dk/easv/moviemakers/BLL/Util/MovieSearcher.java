@@ -21,12 +21,12 @@ public class MovieSearcher {
 
     private boolean compareToMovieTitle(String query, Movies movie) {
         //Method to compare the searchbar with title of the movie
-        return movie.gettitle().toLowerCase().contains(query.toLowerCase());
+        return movie.getTitle().toLowerCase().contains(query.toLowerCase());
     }
 
     private boolean compareToMovieCategory(String query, Movies movie) {
         //Method to compare the searchbar with category of the movie
-        return movie.getcategory().toLowerCase().contains(query.toLowerCase());
+        return movie.getCategory().toLowerCase().contains(query.toLowerCase());
     }
 
     // Method to filter movies by category
@@ -34,7 +34,7 @@ public class MovieSearcher {
         List<Movies> filteredMovies = new ArrayList<>();
 
         for (Movies movie : searchBase) {
-            if (movie.getcategory().equalsIgnoreCase(category)) {
+            if (movie.getCategory().equalsIgnoreCase(category)) {
                 filteredMovies.add(movie);
             }
         }

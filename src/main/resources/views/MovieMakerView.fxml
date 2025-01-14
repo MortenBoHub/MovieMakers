@@ -54,7 +54,7 @@
         </content>
       </ScrollPane>
       <Button fx:id="seaBtn" layoutX="185.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" text="Button" />
-      <Button fx:id="cloBtn" layoutX="668.0" layoutY="437.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Close" />
+      <Button fx:id="cloBtn" layoutX="668.0" layoutY="437.0" mnemonicParsing="false" onAction="#onCloseButtonPressed" prefHeight="25.0" prefWidth="51.0" text="Close" />
       <Button fx:id="linkBtn" layoutX="83.0" layoutY="43.0" mnemonicParsing="false" onAction="#onLinkButtonPressed" text="IMDB" />
       <Label fx:id="currentLab" layoutX="25.0" layoutY="14.0" text="No Movie Selected" />
    </children>

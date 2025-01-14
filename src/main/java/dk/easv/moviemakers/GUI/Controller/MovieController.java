@@ -342,6 +342,13 @@ public class MovieController implements Initializable {
     }
 
     @FXML
+    public void onCloseButtonPressed() {
+        //Closes the window
+        Stage stage = (Stage) cloBtn.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
     private void onLinkButtonPressed() {
         Movies selectedMovie = (Movies) maiTbl.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {

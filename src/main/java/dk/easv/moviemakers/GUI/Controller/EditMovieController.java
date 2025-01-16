@@ -140,7 +140,7 @@ public class EditMovieController {
             if (!category.isEmpty()) {
                 category.setLength(category.length() - 1);
             }
-
+            //Set the new values to the selected movie
             selectedMovie.setCategory(category.toString());
             selectedMovie.setTitle(titBarE.getText());
             selectedMovie.setYear(Integer.parseInt(yeaBarE.getText()));
@@ -150,6 +150,7 @@ public class EditMovieController {
             selectedMovie.setAddress(filBarE.getText());
             selectedMovie.setLastview(Timestamp.valueOf(timBarE.getText()));
 
+            //Update the movie in the database by sending through the layers to the Model
             movieMakerModel.updateMovie(selectedMovie);
 
             if (movieController != null) {
@@ -170,7 +171,7 @@ public class EditMovieController {
 
 
     public void onMP4Pressed() {
-        //Adds mp4 to the address path so the user doesn't have to write it
+        //Adds mp4 to the address path of a chosen file so the user doesn't have to write it
         String currentText = filBarE.getText();
         if (!currentText.toLowerCase().endsWith(".mp4")) {
             currentText += ".mp4";
@@ -180,6 +181,7 @@ public class EditMovieController {
 
     @FXML
     public void onFilePickerPressed() {
+        //Opens a file picker to choose a file. The FILE button is set to have an On Action Event to activate this method
         FileChooser filechooser = new FileChooser();
         filechooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("MP4 files", "*.mp4"));

@@ -247,7 +247,7 @@ public class MovieController implements Initializable {
 
 
             if (!filters.isEmpty()) {
-                movieMakerModel.filterMoviesByCategory(filters);
+                movieMakerModel.filterMoviesByCategory(filters); //Calls the model to filter the movies
             } else {
                 movieMakerModel.refreshMovies(); // Show all movies if no category is selected
             }
@@ -324,8 +324,9 @@ public class MovieController implements Initializable {
             File file = new File("src/main/resources/" + selectedMovie.getAddress());
             if (Desktop.isDesktopSupported()) {
                 try {
+                    //Opens the movie file using the default system application
                     Desktop.getDesktop().open(file);
-                    selectedMovie.setLastview(Timestamp.valueOf(LocalDateTime.now()));
+                    selectedMovie.setLastview(Timestamp.valueOf(LocalDateTime.now())); //Sets the Last Seen to the current time
                     movieMakerModel.updateMovie(selectedMovie);
                     tableRefresh();
                 } catch (IOException e) {
@@ -354,6 +355,7 @@ public class MovieController implements Initializable {
         if (selectedMovie != null) {
             if (Desktop.isDesktopSupported()) {
                 try {
+                    //Opens the selected movie's given link using the default system app/browser
                     Desktop.getDesktop().browse(new URI(selectedMovie.getFilelink()));
                 } catch (Exception e) {
                     displayError(e);

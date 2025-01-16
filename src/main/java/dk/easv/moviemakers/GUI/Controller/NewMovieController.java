@@ -142,7 +142,7 @@ public class NewMovieController {
             Files.copy(selectedFilePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
             address = "Movies/" + selectedFilePath.getFileName().toString();
         }
-
+        //Appends the selected category names to the created movie
         StringBuilder category = new StringBuilder();
         if (comBoxN.isSelected()) category.append("Comedy,");
         if (draBoxN.isSelected()) category.append("Drama,");
@@ -188,7 +188,7 @@ public class NewMovieController {
             movieController.tableRefresh();
         }
 
-        //Close the window
+        //Close the window after saving
         Stage stage = (Stage) savBtnN.getScene().getWindow();
         stage.close();
 
@@ -197,7 +197,7 @@ public class NewMovieController {
 
     @FXML
     public void onCancelButtonPressed() {
-        //Closes the window
+        //Closes the new movie dialogue without saving
         Stage stage = (Stage) canBtnN.getScene().getWindow();
         stage.close();
     }

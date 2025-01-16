@@ -42,7 +42,7 @@ public class MovieSearcher {
         return true;
     }
 
-    // Method to filter movies by category
+    // Method to filter movies by any picked categories of checkboxes
     public List<Movies> filterByCategory(List<Movies> searchBase, ArrayList<String> filters) {
         List<Movies> filteredMovies = new ArrayList<>();
 
